@@ -8,6 +8,7 @@ import { UserService, AuthenticationService } from '@/_services';
 export class HomeComponent implements OnInit {
     currentUser: User;
     users = [];
+    temp: any;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.loadAllUsers();
+        this.loadRoom();
     }
 
     deleteUser(id: number) {
@@ -30,5 +32,11 @@ export class HomeComponent implements OnInit {
         this.userService.getAll()
             .pipe(first())
             .subscribe(users => this.users = users);
+    }
+
+    private loadRoom() {
+        this.userService.getRoom()
+            .pipe(first())
+            .subscribe(temp => this.temp = temp);
     }
 }
