@@ -8,7 +8,9 @@ import { UserService, AuthenticationService } from '@/_services';
 export class HomeComponent implements OnInit {
     currentUser: User;
     users = [];
+    resp: any;
     temp: any;
+    humidity: any;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -19,7 +21,10 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.loadAllUsers();
-        this.loadRoom();
+        // TEMP UNTIL USER REGISTRATION IS DEVELOPED... ONLY USERNAME jonnyparko WILL RETRIEVE DATA
+        if(this.currentUser.username === 'jonnyparko') {
+            this.loadRoom();
+        }
     }
 
     deleteUser(id: number) {
@@ -37,6 +42,13 @@ export class HomeComponent implements OnInit {
     private loadRoom() {
         this.userService.getRoom()
             .pipe(first())
-            .subscribe(temp => this.temp = temp);
+            .subscribe(temp => {
+                this.resp = temp
+                let res = JSON.parse(this.resp);
+                this.temp = res.state.desired.temp;
+                this.humidity = res.state.desired.humd;
+            });
+
+            
     }
-}
+} 
