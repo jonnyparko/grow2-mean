@@ -7,5 +7,8 @@
         - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
     </li>
 </ul>
+<div *ngIf="!isLoading">
 <div>Temperature: {{temp}}</div> 
 <div>Humidity: {{humidity}}</div> 
+</div>
+<mat-progress-spinner mode="indeterminate" *ngIf="isLoading"></mat-progress-spinner>

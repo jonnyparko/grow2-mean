@@ -38,9 +38,9 @@ module.exports = {
             // global app config object
             config: JSON.stringify({
                 // dev
-                // apiUrl: 'http://localhost:4000'
+                apiUrl: 'http://localhost:4000'
                 // prod
-                apiUrl: '/api'
+                // apiUrl: '/api'
 
             })
         }),
